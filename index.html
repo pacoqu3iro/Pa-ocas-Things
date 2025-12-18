@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem-vindo ao Site do Paçoca</title>
     <style>
-        /* Estilização para centralizar tudo na tela */
         body, html {
             height: 100%;
             margin: 0;
@@ -14,7 +13,7 @@
             align-items: center;
             flex-direction: column;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #000000; /* Cor de fundo suave */
+            background-color: #000000;
         }
 
         h1 {
@@ -24,24 +23,25 @@
         }
 
         .botao-entrar {
-            background-color: #6A5ACD; /* Roxo que você escolheu anteriormente */
+            background-color: #6A5ACD;
             color: white;
             padding: 15px 30px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.2rem;
-            border-radius: 50px; /* Botão mais arredondado */
+            border-radius: 50px;
             transition: transform 0.2s, background-color 0.3s;
             box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
+            cursor: pointer;
+            border: none;
+            display: inline-block;
         }
 
-        /* Efeito ao passar o mouse */
         .botao-entrar:hover {
             background-color: #8A2BE2;
-            transform: scale(1.05); /* Aumenta levemente o tamanho */
+            transform: scale(1.05);
         }
 
-        /* Efeito ao clicar */
         .botao-entrar:active {
             transform: scale(0.95);
         }
@@ -51,7 +51,33 @@
 
     <h1>Seja bem vindo ao site do paçoca!</h1>
     
-    <a href="index3.html" class="botao-entrar">Entrar no Site</a>
+    <audio id="musica">
+        <source src="flamengo.mp3" type="audio/mpeg">
+    </audio>
+
+    <a href="javascript:void(0)" onclick="entrarComSom()" class="botao-entrar">Entrar no Site</a>
+
+    <script>
+        function entrarComSom() {
+            var audio = document.getElementById("musica");
+            
+            // Toca o áudio
+            audio.play();
+
+            // EVENTO MÁGICO: Quando o áudio terminar (ended), ele executa a mudança de página
+            audio.onended = function() {
+                window.location.href = "index3.html";
+            };
+
+            // Caso o áudio falhe por algum motivo, adicionamos um "plano B" 
+            // para o usuário não ficar travado na página se o som não carregar.
+            setTimeout(function() {
+                if (audio.paused) { 
+                    window.location.href = "index3.html";
+                }
+            }, 30000); // Se em 3 segundos não tocar, ele muda a página assim mesmo
+        }
+    </script>
 
 </body>
 </html>
